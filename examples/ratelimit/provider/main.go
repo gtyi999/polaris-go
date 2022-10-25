@@ -44,7 +44,7 @@ func initArgs() {
 	flag.StringVar(&service, "service", "RateLimitEchoServer", "service")
 	// 当北极星开启鉴权时，需要配置此参数完成相关的权限检查
 	flag.StringVar(&token, "token", "", "token")
-	flag.Int64Var(&port, "port", 0, "port")
+	flag.Int64Var(&port, "port", 38081, "port")
 }
 
 // PolarisProvider implements the Provider interface.
@@ -84,7 +84,8 @@ func (svr *PolarisProvider) runWebServer() {
 			quotaReq.GetNamespace(), quotaReq.GetService(), quotaReq.GetMethod(), quotaReq.GetLabels())
 		resp, err := svr.limiter.GetQuota(quotaReq)
 
-		log.Printf("[info] get quota resp : code=%d, info=%s", resp.Get().Code, resp.Get().Info)
+		//log.Printf("[info] get quota resp : code=%d, info=%s", resp.Get().Code, resp.Get().Info)
+		log.Printf("[info] get quota resp : code=%d, info=%s", resp.GetImmediately().Code, resp.GetImmediately().Info)
 
 		if err != nil {
 			rw.WriteHeader(http.StatusInternalServerError)
@@ -92,7 +93,12 @@ func (svr *PolarisProvider) runWebServer() {
 			return
 		}
 
-		if resp.Get().Code != model.QuotaResultOk {
+		//if resp.Get().Code != model.QuotaResultOk {
+		//	rw.WriteHeader(http.StatusTooManyRequests)
+		//	_, _ = rw.Write([]byte(http.StatusText(http.StatusTooManyRequests)))
+		//	return
+		//}
+		if resp.GetImmediately().Code != model.QuotaResultOk {
 			rw.WriteHeader(http.StatusTooManyRequests)
 			_, _ = rw.Write([]byte(http.StatusText(http.StatusTooManyRequests)))
 			return

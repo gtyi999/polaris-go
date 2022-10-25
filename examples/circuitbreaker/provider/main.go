@@ -42,7 +42,7 @@ func initArgs() {
 	flag.StringVar(&service, "service", "CircuitBreakerEchoServer", "service")
 	// 当北极星开启鉴权时，需要配置此参数完成相关的权限检查
 	flag.StringVar(&token, "token", "", "token")
-	flag.Int64Var(&port, "port", 0, "port")
+	flag.Int64Var(&port, "port", 28081, "port")
 }
 
 // PolarisProvider is a provider for polaris

@@ -85,15 +85,15 @@ func (svr *PolarisConsumer) runWebServer() {
 
 				if err := svr.consumer.UpdateServiceCallResult(callRet); err != nil {
 					log.Printf("[errot] fail to UpdateServiceCallResult, err is %v", err)
-					rw.WriteHeader(http.StatusInternalServerError)
-					_, _ = rw.Write([]byte(fmt.Sprintf("[errot] fail to UpdateServiceCallResult, err is %v", err)))
-					_, _ = rw.Write([]byte("\n"))
+					//rw.WriteHeader(http.StatusInternalServerError)
+					//_, _ = rw.Write([]byte(fmt.Sprintf("[errot] fail to UpdateServiceCallResult, err is %v", err)))
+					//_, _ = rw.Write([]byte("\n"))
 					continue
 				}
 				log.Printf("[errot] send request to %s:%d fail : %s", instance.GetHost(), instance.GetPort(), err)
-				rw.WriteHeader(http.StatusInternalServerError)
-				_, _ = rw.Write([]byte(fmt.Sprintf("[errot] send request to %s:%d fail : %s", instance.GetHost(), instance.GetPort(), err)))
-				_, _ = rw.Write([]byte("\n"))
+				//rw.WriteHeader(http.StatusInternalServerError)
+				//_, _ = rw.Write([]byte(fmt.Sprintf("[errot] send request to %s:%d fail : %s", instance.GetHost(), instance.GetPort(), err)))
+				//_, _ = rw.Write([]byte("\n"))
 				continue
 			}
 

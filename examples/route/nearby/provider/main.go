@@ -50,7 +50,7 @@ func initArgs() {
 	flag.StringVar(&token, "token", "", "token")
 	flag.StringVar(&metadata, "metadata", "", "key1=value1&key2=value2")
 
-	flag.IntVar(&port, "port", 0, "port")
+	flag.IntVar(&port, "port", 19091, "port")
 	flag.StringVar(&host, "host", "", "host")
 }
 
@@ -118,6 +118,7 @@ func (svr *PolarisProvider) runWebServer() {
 		if err := http.Serve(ln, nil); err != nil {
 			log.Fatalf("[ERROR]fail to run webServer, err is %v", err)
 		}
+		log.Printf("[INFO] go func")
 	}()
 
 }

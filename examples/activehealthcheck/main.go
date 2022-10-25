@@ -35,7 +35,7 @@ var (
 
 func initArgs() {
 	flag.StringVar(&namespace, "namespace", "default", "namespace")
-	flag.StringVar(&service, "service", "", "service")
+	flag.StringVar(&service, "service", "healthcheckServer", "service")
 	flag.StringVar(&token, "token", "", "token")
 }
 
